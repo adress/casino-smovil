@@ -1,0 +1,38 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Src\Shared\Domain\Criteria;
+
+use Src\Shared\Domain\ValueObject\Enum;
+use InvalidArgumentException;
+
+/**
+ * @method static FilterOperator gt()
+ * @method static FilterOperator lt()
+ * @method static FilterOperator like()
+ */
+final class FilterOperator extends Enum
+{
+    public const EQUAL        = '=';
+    public const NOT_EQUAL    = '!=';
+    public const GT           = '>';
+    public const LT           = '<';
+    public const GTE          = '>=';      //added sofadress
+    public const LTE          = '<=';      //added sofadress
+    public const BETWEEN      = 'BETWEEN'; //added sofadress
+    public const IN           = 'IN';       //added sofadress
+    public const CONTAINS     = 'CONTAINS';
+    public const NOT_CONTAINS = 'NOT_CONTAINS';
+    private static array $containing = [self::CONTAINS, self::NOT_CONTAINS];
+
+    public function isContaining(): bool
+    {
+        return in_array($this->value(), self::$containing, true);
+    }
+
+    protected function throwExceptionForInvalidValue($value): never
+    {
+        throw new InvalidArgumentException(sprintf('The filter <%s> is invalid', $value));
+    }
+}
