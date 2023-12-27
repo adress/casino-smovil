@@ -12,7 +12,7 @@ Para iniciar desarrollo ejecute: (recuerde tener el alias de sail)
 sail up -d
 ```
 ## Importante!!!!
-Si va a desplegar desde Docker la primera vez tendrá que adentrarse en el contenedor de del backend y ejecutar
+Si va a desplegar desde Docker, la primera vez tendrá que ejecutar:
 ```bash
 docker exec nombre_del_contenedor php artisan migrate --seed
 ```
